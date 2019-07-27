@@ -1,9 +1,4 @@
-// rooms
-let redRoom = new Room("the red room", "you're in the red room", ["apple", "watermelon"], ["n","w"])
-let blueRoom = new Room("the blue room", "you're in the blue room", ["blueberry", "fig"], ["n","e"])
-let greenRoom = new Room("the green room", "you're in the green room", ["lime", "grape"], ["s","w"])
-let yellowRoom = new Room("the yellow room", "you're in the yellow room", ["lemon", "mango"], ["s", "e"])
-
+// user
 let user = new User([], redRoom)
 
 // global commands
@@ -51,6 +46,10 @@ input.addEventListener("keyup", (event) => {
                 user.room = redRoom
                 input.value = ""
             }
+            else if(globals.includes(x) || globals.includes(x.slice(0,5))) {
+                printGlobals(x, blueRoom.info, blueRoom.inv, response, input, user)
+                input.value = ""
+            }
             else if(user.room.walls.includes(x)) {
                 response.innerHTML = "can't go that way"
                 input.value = ""
@@ -72,6 +71,10 @@ input.addEventListener("keyup", (event) => {
                 user.room = yellowRoom
                 input.value = ""
             }
+            else if(globals.includes(x) || globals.includes(x.slice(0,5))) {
+                printGlobals(x, greenRoom.info, greenRoom.inv, response, input, user)
+                input.value = ""
+            }
             else if(user.room.walls.includes(x)) {
                 response.innerHTML = "can't go that way"
                 input.value = ""
@@ -91,6 +94,10 @@ input.addEventListener("keyup", (event) => {
             else if(x === "n") {
                 response.innerHTML = "you walk into the blue room"
                 user.room = blueRoom
+                input.value = ""
+            }
+            else if(globals.includes(x) || globals.includes(x.slice(0,5))) {
+                printGlobals(x, yellowRoom.info, yellowRoom.inv, response, input, user)
                 input.value = ""
             }
             else if(user.room.walls.includes(x)) {
