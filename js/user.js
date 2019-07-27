@@ -1,6 +1,6 @@
 class User {
-    constrcutor(inv, loc) {
+    constructor(inv, room) {
         this.inv = inv
-        this.loc = loc
+        this.room = room
     }
 }
