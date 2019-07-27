@@ -1,0 +1,40 @@
+.row {
+    display: flex;
+    /* justify-content: center; */
+    /* align-items: center; */
+}
+
+.column {
+    background-color: #515151;
+    color: white;
+    font-family: ocr-a-std, monospace;
+    font-style: normal;
+    font-weight: 200;
+    flex: 50%;
+    padding: 10px;
+}
+
+.beginning {
+    color: white;
+    font-family: ocr-a-std, monospace;
+    font-style: normal;
+    font-weight: 200;
+    padding: 10px;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    /* text-align: center; */
+}
+
+input {
+    background-color: black;
+    border: black;
+    color: cyan;
+    font-family: ocr-a-std, monospace;
+    font-style: normal;
+    font-weight: 200;
+    font-size: 100%;
+    min-width: 0;
+    outline: none;
+}
