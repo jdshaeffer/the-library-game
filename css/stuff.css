@@ -14,20 +14,21 @@
     padding: 10px;
 }
 
-.beginning {
+.total.center {
     color: white;
     font-family: ocr-a-std, monospace;
     font-style: normal;
     font-weight: 200;
-    padding: 10px;
+
     position: absolute;
     top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-    /* text-align: center; */
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 
-input {
+input.beginning {
+    text-align: center;
     background-color: black;
     border: black;
     color: cyan;
