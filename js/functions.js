@@ -3,10 +3,19 @@ let look = (roomInfo, roomInv, response, input) => {
         response.innerHTML = roomInfo 
     }
     else {
-        response.innerHTML = roomInfo + "<br>" 
+        // response.innerHTML = roomInfo + ". " 
+        response.innerHTML = roomInfo + "<br>"
         for(let item of roomInv) {
             response.appendChild(document.createTextNode("there is " + item.indef + " " + item.name + " here"))
             response.appendChild(document.createElement("br"))
+            // if(roomInv[length-1] != item) { // if it's not the last item
+            //     if(roomInv[0] === item) {
+            //         response.appendChild(document.createTextNode("there is " + item.indef + " " + item.name + " and "))
+            //     }
+            //     else {
+            //         response.appendChild(document.createTextNode(item.indef + " " + item.name + " and "))
+            //     }
+            // }
         }
     }
     input.value = ""
