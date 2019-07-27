@@ -1,5 +1,14 @@
 let look = (roomInfo, roomInv, response, input) => {
-    response.innerHTML = roomInfo
+    if(roomInv.length === 0) {
+        response.innerHTML = roomInfo 
+    }
+    else {
+        response.innerHTML = roomInfo + "<br>" 
+        for(let item of roomInv) {
+            response.appendChild(document.createTextNode("there is " + item.indef + " " + item.name + " here"))
+            response.appendChild(document.createElement("br"))
+        }
+    }
     input.value = ""
 }
 
@@ -28,19 +37,37 @@ let printGlobals = (x, roomInfo, roomInv, response, input, user) => {
     }
 }
 
-// eventually user inventory can be a piece of the ui - like a small list that can expand or something that stays on the side of the screen
+// eventually user inventory can be a piece of the ui - like a small list somewhere on the screen
 let printUserInv = (user) => {
-    response.innerHTML = "you have:\n stuff"
+    if(user.inv.length === 0) {
+        response.innerHTML = "you don't have anything" 
+    }
+    else {
+        response.innerHTML = "you have:<br>"
+        for(let item of user.inv) {
+            response.appendChild(document.createTextNode(item.indef + " " + item.name))
+            response.appendChild(document.createElement("br"))
+        }
+    }
     input.value = ""
 }
 
 let take = (thing, roomInv, userInv, response, input) => {
-    if(roomInv.includes(thing)) {
-        userInv.push(thing)
-        roomInv.pop(thing)
-        response.innerHTML = "you take the " + thing 
+    let itemFound = false
+    for(let item of roomInv) {
+        if(item.name === thing) {
+            userInv.push(item) // user inv is array of item objects, not strings
+            roomInv.pop(item)
+            response.innerHTML = "you take the " + item.name
+            itemFound = true
+        }
     }
-    else {
+    // if(roomInv.includes(thing)) {
+    //     userInv.push(thing)
+    //     roomInv.pop(thing)
+    //     response.innerHTML = "you take the " + thing 
+    // }
+    if(!itemFound) {
         response.innerHTML = "you can't take that"
     }
     input.value = ""
