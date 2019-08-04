@@ -46,7 +46,6 @@ let printGlobals = (x, roomInfo, roomInv, response, input, user) => {
     }
 }
 
-// eventually user inventory can be a piece of the ui - like a small list somewhere on the screen
 let printUserInv = (user) => {
     if(user.inv.length === 0) {
         response.innerHTML = "you don't have anything" 
@@ -66,16 +65,11 @@ let take = (thing, roomInv, userInv, response, input) => {
     for(let item of roomInv) {
         if(item.name === thing) {
             userInv.push(item) // user inv is array of item objects, not strings
-            roomInv.pop(item)
+            roomInv.splice(roomInv.indexOf(item), 1)
             response.innerHTML = "you take the " + item.name
             itemFound = true
         }
     }
-    // if(roomInv.includes(thing)) {
-    //     userInv.push(thing)
-    //     roomInv.pop(thing)
-    //     response.innerHTML = "you take the " + thing 
-    // }
     if(!itemFound) {
         response.innerHTML = "you can't take that"
     }
@@ -83,12 +77,16 @@ let take = (thing, roomInv, userInv, response, input) => {
 }
 
 let drop = (thing, roomInv, userInv, response, input) => {
-    if(userInv.includes(thing)) {
-        roomInv.push(thing)
-        userInv.pop(thing)
-        response.innerHTML = "you drop the " + thing
+    let itemFound = false
+    for(let item of userInv) {
+        if(item.name === thing) {
+            roomInv.push(item)
+            userInv.splice(userInv.indexOf(item), 1)
+            response.innerHTML = "you drop the " + thing
+            itemFound = true
+        }
     }
-    else {
+    if(!itemFound) {
         response.innerHTML = "you can't drop that"
     }
     input.value = ""
