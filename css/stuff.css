@@ -17,7 +17,6 @@
     font-style: normal;
     font-weight: 200;
 
-    position: relative;
     top: 40%;
     left: 50%;
     -ms-transform: translate(-50%, -50%);
@@ -36,20 +35,4 @@ input.beginning {
     min-width: 0;
     outline: none;
 }
-
-/* .row { */
-/*     display: flex; */
-/*     /1* justify-content: center; *1/ */
-/*     /1* align-items: center; *1/ */
-/* } */
-
-/* .column { */
-/*     background-color: #515151; */
-/*     color: white; */
-/*     font-family: ocr-a-std, monospace; */
-/*     font-style: normal; */
-/*     font-weight: 200; */
-/*     flex: 50%; */
-/*     padding: 10px; */
-/* } */
 

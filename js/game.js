@@ -2,7 +2,11 @@
 let user = new User([], redRoom)
 
 // global commands
-let globals = ["l", "i", "take ", "take", "drop ", "drop"]
+let globals = ["l", "look", "x", "examine", "look around",
+    "i", "inventory",
+    "take ", "take", "t", "t ",
+    "drop ", "drop", "d", "d ",
+    "help"]
 
 // game
 let input = document.getElementById("input")

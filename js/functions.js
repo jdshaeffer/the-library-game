@@ -3,36 +3,31 @@ let look = (roomInfo, roomInv, response, input) => {
         response.innerHTML = roomInfo 
     }
     else {
-        // response.innerHTML = roomInfo + ". " 
         response.innerHTML = roomInfo + "<br>"
         for(let item of roomInv) {
             response.appendChild(document.createTextNode("there is " + item.indef + " " + item.name + " here"))
             response.appendChild(document.createElement("br"))
-            // if(roomInv[length-1] != item) { // if it's not the last item
-            //     if(roomInv[0] === item) {
-            //         response.appendChild(document.createTextNode("there is " + item.indef + " " + item.name + " and "))
-            //     }
-            //     else {
-            //         response.appendChild(document.createTextNode(item.indef + " " + item.name + " and "))
-            //     }
-            // }
         }
     }
     input.value = ""
 }
 
 let printGlobals = (x, roomInfo, roomInv, response, input, user) => {
-    if(x === "l") {
+    if(x === "l" || x === "look" || x === "x" || x === "examine" || x === "look around") {
         look(roomInfo, roomInv, response, input)
     }
-    else if(x === "i") {
+    else if(x === "i" || x === "inventory") {
         printUserInv(user)
     }
     else if(x.slice(0,5) === "take ") {
         let thing = x.slice(5)
         take(thing, roomInv, user.inv, response, input)
     }
-    else if(x === "take") {
+    else if(x.slice(0,2) === "t ") {
+        let thing = x.slice(t)
+        take(thing, roomInv, user.inv, response, input)
+    }
+    else if(x === "take" || x === "t") {
         response.innerHTML = "specify what you want to take"
         input.value = ""
     }
@@ -40,8 +35,21 @@ let printGlobals = (x, roomInfo, roomInv, response, input, user) => {
         let thing = x.slice(5)
         drop(thing, roomInv, user.inv, response, input)
     }
-    else if(x === "drop") {
+    else if(x.slice(0,2) === "d ") {
+        let thing = x.slice(2)
+        drop(thing, roomInv, user.inv, response, input)
+    }
+    else if(x === "drop" || x === "d") {
         response.innerHTML = "specify what you want to drop"
+        input.value = ""
+    }
+    else if(x === "help") {
+        response.innerHTML = "n, s, e, w - move around<br>" +
+            "take - take an item<br>" +
+            "drop - drop an item<br>" +
+            "i - check your inventory<br>" +
+            "x - examine an item/room<br>" +
+            "l - look at an item/room<br>"
         input.value = ""
     }
 }
