@@ -24,7 +24,7 @@ let printGlobals = (x, roomInfo, roomInv, response, input, user) => {
         take(thing, roomInv, user.inv, response, input)
     }
     else if(x.slice(0,2) === "t ") {
-        let thing = x.slice(t)
+        let thing = x.slice(2)
         take(thing, roomInv, user.inv, response, input)
     }
     else if(x === "take" || x === "t") {
@@ -70,16 +70,31 @@ let printUserInv = (user) => {
 
 let take = (thing, roomInv, userInv, response, input) => {
     let itemFound = false
-    for(let item of roomInv) {
-        if(item.name === thing) {
-            userInv.push(item) // user inv is array of item objects, not strings
-            roomInv.splice(roomInv.indexOf(item), 1)
-            response.innerHTML = "you take the " + item.name
-            itemFound = true
+    let takeAll = false
+    let allResponse = ""
+    if(thing === "all") { // if user decides to take everything in the room
+        if(roomInv.length === 0) {
+            response.innerHTML = "you can't take that" // not DRY
         }
+        for(let item of roomInv) {
+            userInv.push(item)
+            allResponse += "you take the " + item.name + "<br>"
+            response.innerHTML = allResponse
+        }
+        roomInv.length = 0 // empty array
     }
-    if(!itemFound) {
-        response.innerHTML = "you can't take that"
+    else {
+        for(let item of roomInv) {
+            if(item.name === thing) {
+                userInv.push(item) // user inv is array of item objects, not strings
+                roomInv.splice(roomInv.indexOf(item), 1)
+                response.innerHTML = "you take the " + item.name
+                itemFound = true
+            }
+        }
+        if(!itemFound) {
+            response.innerHTML = "you can't take that"
+        }
     }
     input.value = ""
 }
