@@ -25,7 +25,7 @@ input.addEventListener("keyup", (event) => {
                 user.room = greenRoom
                 input.value = ""
             }
-            else if(globals.includes(x) || globals.includes(x.slice(0,5))) {
+            else if(globals.includes(x) || globals.includes(x.slice(0,5)) || globals.includes(x.slice(0,2))) {
                 printGlobals(x, redRoom.info, redRoom.inv, response, input, user)
                 input.value = ""
             }
