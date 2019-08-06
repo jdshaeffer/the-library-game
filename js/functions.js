@@ -69,13 +69,11 @@ let printUserInv = (user) => {
 }
 
 let take = (thing, roomInv, userInv, response, input) => {
-    let itemFound = false
-    let takeAll = false
-    let allResponse = ""
+    if(roomInv.length === 0) {
+        response.innerHTML = "you can't take that"
+    }
     if(thing === "all") { // if user decides to take everything in the room
-        if(roomInv.length === 0) {
-            response.innerHTML = "you can't take that" // not DRY
-        }
+        let allResponse = ""
         for(let item of roomInv) {
             userInv.push(item)
             allResponse += "you take the " + item.name + "<br>"
@@ -84,33 +82,44 @@ let take = (thing, roomInv, userInv, response, input) => {
         roomInv.length = 0 // empty array
     }
     else {
-        for(let item of roomInv) {
+        for(let item of roomInv) { // not very dry right now
             if(item.name === thing) {
                 userInv.push(item) // user inv is array of item objects, not strings
                 roomInv.splice(roomInv.indexOf(item), 1)
                 response.innerHTML = "you take the " + item.name
-                itemFound = true
             }
-        }
-        if(!itemFound) {
-            response.innerHTML = "you can't take that"
+            else {
+                response.innerHTML = "you can't take that" 
+            }
         }
     }
     input.value = ""
 }
 
 let drop = (thing, roomInv, userInv, response, input) => {
-    let itemFound = false
-    for(let item of userInv) {
-        if(item.name === thing) {
-            roomInv.push(item)
-            userInv.splice(userInv.indexOf(item), 1)
-            response.innerHTML = "you drop the " + thing
-            itemFound = true
-        }
-    }
-    if(!itemFound) {
+    if(userInv.length === 0) {
         response.innerHTML = "you can't drop that"
+    }
+    if(thing === "all") {
+        let allResponse = ""
+        for(let item of userInv) {
+            roomInv.push(item)
+            allResponse += "you drop the " + item.name + "<br>"
+            response.innerHTML = allResponse
+        }
+        userInv.length = 0 // empty array
+    }
+    else {
+        for(let item of userInv) {
+            if(item.name === thing) {
+                roomInv.push(item)
+                userInv.splice(userInv.indexOf(item), 1)
+                response.innerHTML = "you drop the " + thing
+            }
+            else {
+                response.innerHTML = "you can't drop that"
+            }
+        }
     }
     input.value = ""
 }
