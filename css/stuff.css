@@ -36,3 +36,6 @@ input.beginning {
     outline: none;
 }
 
+.phaser {
+    display: none!important;
+}

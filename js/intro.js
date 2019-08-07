@@ -1,4 +1,3 @@
-// user
 let user = new User([], redRoom)
 
 // global commands
