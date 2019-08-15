@@ -4,38 +4,42 @@ let config = {
     height: 600,
     autoCenter: 1,
     autoFocus: true,
+    parent: 'game-container', //id of the dom element to add the canvas to
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 200 }
+            gravity: {y: 0} // no gravity needed in top down game
         }
     },
     scene: {
         preload: preload,
-        create: create
+        create: create,
+        update: update
     }
 }
 
-let game = new Phaser.Game(config)
+const game = new Phaser.Game(config)
+// const player
 
 function preload () {
-    this.load.setBaseURL('http://labs.phaser.io');
-    this.load.image('sky', 'assets/skies/space3.png');
-    this.load.image('logo', 'assets/sprites/phaser3-logo.png');
-    this.load.image('red', 'assets/particles/red.png');
+    this.load.image('tiles', '../assets/tilesets/tuxemon.png')
+    this.load.tilemapTiledJSON('map', '../assets/maps/grass_world.json')
 }
 
 function create () {
-    this.add.image(400, 300, 'sky');
-    let particles = this.add.particles('red');
-    let emitter = particles.createEmitter({
-        speed: 100,
-        scale: { start: 1, end: 0 },
-        blendMode: 'ADD'
-    });
-    let logo = this.physics.add.image(400, 100, 'logo');
-    logo.setVelocity(100, 200);
-    logo.setBounce(1, 1);
-    logo.setCollideWorldBounds(true);
-    emitter.startFollow(logo);
+    const map = this.make.tilemap({key: 'map'})
+    const tileset = map.addTilesetImage('tuxemon', 'tiles')
+
+    // parameters: layer name from tiled, tileset, x, y
+    const groundLayer = map.createStaticLayer('Ground', tileset, 0, 0) 
+    const worldLayer = map.createStaticLayer('World', tileset, 0, 0) 
+    const aboveLayer = map.createStaticLayer('Above Player', tileset, 0, 0) 
+    worldLayer.setCollisionByProperty({collides: true}) // set collisions - with collides property in tiled
+
+    // player stuff
+    // player = this.physics.add.sprite(400, 350, 'atlas', 'misa-front')
+}
+
+function update(time, delta) {
+
 }
