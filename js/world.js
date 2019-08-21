@@ -39,7 +39,6 @@ function create () {
     const tileset = map.addTilesetImage('tuxemon', 'tiles')
 
     // parameters: layer name from tiled, tileset, x, y
-    const groundLayer = map.createStaticLayer('Ground', tileset, 0, 0) 
     const worldLayer = map.createStaticLayer('World', tileset, 0, 0) 
     const aboveLayer = map.createStaticLayer('Above Player', tileset, 0, 0) 
     worldLayer.setCollisionByProperty({collides: true}) // set collisions - with collides property in tiled
@@ -112,6 +111,7 @@ function update(time, delta) {
     const prevVelocity = player.body.velocity.clone()
 
     player.body.setVelocity(0) // stop prev movement from last frame
+
     // horizontal movement
     if(cursors.left.isDown) {
         player.body.setVelocityX(-100)
@@ -119,6 +119,7 @@ function update(time, delta) {
     else if(cursors.right.isDown) {
         player.body.setVelocityX(100)
     }
+
     // vertical movement
     if(cursors.up.isDown) {
         player.body.setVelocityY(-100)
