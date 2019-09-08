@@ -11,4 +11,4 @@ let blueRoom = new Room("the blue room", "you're in the blue room", [blueberry, 
 let greenRoom = new Room("the green room", "you're in the green room", [lime, grape], ["s","w"])
 let yellowRoom = new Room("the yellow room", "you're in the yellow room", [lemon, mango], ["s", "e"])
 
-let desks = new Room("a desk", "", [pencil, paper], ["n","w"])
+let desks = new Room("a desk", "", [pencil, paper], ["w","s"])
