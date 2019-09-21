@@ -7,8 +7,19 @@ class Room {
     }
 }
 
-let blueRoom = new Room("the blue room", "you're in the blue room", [blueberry, fig], ["n","e"])
-let greenRoom = new Room("the green room", "you're in the green room", [lime, grape], ["s","w"])
-let yellowRoom = new Room("the yellow room", "you're in the yellow room", [lemon, mango], ["s", "e"])
-
-let desks = new Room("a desk", "", [pencil, paper], ["w","s"])
+// TODO: deterimne objects - use of objects? use them in outside world?
+let desks = new Room("a desk", "", [], ["w","s","n"])
+let locked_door_to_harp_room = new Room("","",[],["w","n","e"])
+let shelves = new Room("", "", [], [])
+let displays = new Room("", "", [], [])
+let more_displays = new Room("", "", [], [])
+let exit = new Room("", "", [], [])
+let n_s_hallway = new Room("", "", [], [])
+let door_to_room4425 = new Room("", "", [], [])
+let room4425 = new Room("", "", [], [])
+let door_to_room4424 = new Room("", "", [], [])
+let room4424 = new Room("", "", [], [])
+let intersection1 = new Room("", "", [], [])
+let w_e_hallway = new Room("", "", [], [])
+let intersection2 = new Room("", "", [], [])
+let harp_room = new Room("", "", [], [])
