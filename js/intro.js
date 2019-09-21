@@ -1,4 +1,4 @@
-let user = new User([], redRoom)
+let user = new User([], desks)
 
 // global commands
 let globals = ["l", "look", "x", "examine", "look around",
