@@ -11,7 +11,7 @@ class Room {
 // TODO: deterimne objects - use of objects? use them in outside world?
 let desks = new Room("a desk", "it's a desk with some papers - there's a window overlooking a courtyard - some bookshelves to the east", [], ["w","s","n"], false)
 let door_to_harp_room = new Room("locked door", "just a door with a small window - you could probably look through - the shelves are south", [], ["w","n","e"], false)
-let shelves = new Room("shelves", "you're in the middle of a long row of shelves filled with tall, thin books - continues e/w", [], ["s"], false)
+let shelves = new Room("shelves", "you're in the middle of a long row of shelves filled with tall, thin books - continues e/w and a space to the north", [], ["s"], false)
 let displays = new Room("displays", "there's a glass display case with a viola and some plaster hands - more displays to the south and a door to the east", [], ["n"], false)
 let more_displays = new Room("more displays", "another display with pictures and memorabilia of an old musician", [], ["e","s","w"], false)
 let door_to_viola_room = new Room("door to viola room", "the room you were in lies to the west - you see more doors to the north", [], ["s","e"], false)
