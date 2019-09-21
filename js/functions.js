@@ -1,31 +1,17 @@
-let look = (roomInfo, roomInv, response, input) => {
-    if(roomInv.length === 0) {
-        response.innerHTML = roomInfo 
-    }
-    else {
-        response.innerHTML = roomInfo + "<br>"
-        for(let item of roomInv) {
-            response.appendChild(document.createTextNode("there is " + item.indef + " " + item.name + " here"))
-            response.appendChild(document.createElement("br"))
-        }
-    }
-    input.value = ""
-}
-
-let printGlobals = (x, roomInfo, roomInv, response, input, user) => {
+let printGlobals = (x, room, response, input, user) => {
     if(x === "l" || x === "look" || x === "x" || x === "examine" || x === "look around") {
-        look(roomInfo, roomInv, response, input)
+        look(room, response, input)
     }
     else if(x === "i" || x === "inventory") {
         printUserInv(user)
     }
     else if(x.slice(0,5) === "take ") {
         let thing = x.slice(5)
-        take(thing, roomInv, user.inv, response, input)
+        take(thing, room.inv, user.inv, response, input)
     }
     else if(x.slice(0,2) === "t ") {
         let thing = x.slice(2)
-        take(thing, roomInv, user.inv, response, input)
+        take(thing, room.inv, user.inv, response, input)
     }
     else if(x === "take" || x === "t") {
         response.innerHTML = "specify what you want to take"
@@ -33,11 +19,11 @@ let printGlobals = (x, roomInfo, roomInv, response, input, user) => {
     }
     else if(x.slice(0,5) === "drop ") {
         let thing = x.slice(5)
-        drop(thing, roomInv, user.inv, response, input)
+        drop(thing, room.inv, user.inv, response, input)
     }
     else if(x.slice(0,2) === "d ") {
         let thing = x.slice(2)
-        drop(thing, roomInv, user.inv, response, input)
+        drop(thing, room.inv, user.inv, response, input)
     }
     else if(x === "drop" || x === "d") {
         response.innerHTML = "specify what you want to drop"
@@ -52,6 +38,22 @@ let printGlobals = (x, roomInfo, roomInv, response, input, user) => {
             "l - look at an item/room<br>"
         input.value = ""
     }
+}
+
+let look = (room, response, input) => {
+    if(room.inv.length === 0) {
+        response.innerHTML = room.name
+        response.appendChild(document.createElement("br"))
+        response.append(room.info)
+    }
+    else {
+        response.innerHTML = room.info + "<br>"
+        for(let item of room.inv) {
+            response.appendChild(document.createTextNode("there is " + item.indef + " " + item.name + " here"))
+            response.appendChild(document.createElement("br"))
+        }
+    }
+    input.value = ""
 }
 
 let printUserInv = (user) => {
@@ -121,5 +123,17 @@ let drop = (thing, roomInv, userInv, response, input) => {
             }
         }
     }
+    input.value = ""
+}
+
+// function called when player moves to another room
+let enter = (room, input, user, response) => {
+    response.innerHTML = room.name
+    if(!room.visited) { // if first time visiting, print full description automatically
+        response.appendChild(document.createElement("br"))
+        response.append(room.info)
+        room.visited = true
+    }
+    user.room = room
     input.value = ""
 }
