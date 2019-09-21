@@ -139,6 +139,27 @@ input.addEventListener("keyup", (event) => {
             }
         }
 
+        else if(user.room === n_s_hallway) {
+            if(x === "n") {
+                enter(door_to_room4425, input, user, response)
+            }
+            else if(x === "s") {
+                enter(door_to_viola_room, input, user, response)
+            }
+            else if(globals.includes(x) || globals.includes(x.slice(0,5))) {
+                printGlobals(x, displays, response, input, user)
+                input.value = ""
+            }
+            else if(user.room.walls.includes(x)) {
+                response.innerHTML = "can't go that way"
+                input.value = ""
+            }
+            else {
+                response.innerHTML = "what?"
+                input.value = ""
+            }
+        }
+
         else if(user.room === door_to_room4425) {
             if(x === "s") {
                 enter(n_s_hallway, input, user, response)
